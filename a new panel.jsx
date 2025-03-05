@@ -50,7 +50,7 @@ var box03Input = addInputField(contentGroup, 'box03');
 var box04LabelInput = addInputField(contentGroup, 'box04label');
 var box04Input = addInputField(contentGroup, 'box04');
 var box05LabelInput = addInputField(contentGroup, 'box05label');
-var box05aInput = addInputField(contentGroup, 'box05');
+var box05Input = addInputField(contentGroup, 'box05');
 var box06LabelInput = addInputField(contentGroup, 'box06label');
 var box06Input = addInputField(contentGroup, 'box06');
 var box07LabelInput = addInputField(contentGroup, 'box07label');
@@ -77,10 +77,6 @@ var box17LabelInput = addInputField(contentGroup, 'box17label');
 var box17Input = addInputField(contentGroup, 'box17');
 var box18LabelInput = addInputField(contentGroup, 'box18label');
 var box18Input = addInputField(contentGroup, 'box18');
-var box19LabelInput = addInputField(contentGroup, 'box19label');
-var box19Input = addInputField(contentGroup, 'box19');
-var box20LabelInput = addInputField(contentGroup, 'box20label');
-var box20Input = addInputField(contentGroup, 'box20');
 
 // Function to populate input fields based on existing text objects
 function populateInputFields() {
@@ -155,14 +151,8 @@ function populateInputFields() {
                 case "box05label":
                     box05LabelInput.text = item.contents;
                     break;
-                case "box05a":
-                    box05aInput.text = item.contents;
-                    break;
-                case "box05b":
-                    box05bInput.text = item.contents;
-                    break;
-                case "box05c":
-                    box05cInput.text = item.contents;
+                case "box05":
+                    box05Input.text = item.contents;
                     break;
                 case "box06label":
                     box06LabelInput.text = item.contents;
@@ -239,20 +229,8 @@ function populateInputFields() {
                 case "box18label":
                     box18LabelInput.text = item.contents;
                     break;
-                case "box18":   
+                case "box18":
                     box18Input.text = item.contents;
-                    break;
-                case "box19label":
-                    box19LabelInput.text = item.contents;
-                    break;
-                case "box19":   
-                    box19Input.text = item.contents;
-                    break;
-                case "box20label":
-                    box20LabelInput.text = item.contents;
-                    break;
-                case "box20":   
-                    box20Input.text = item.contents;
                     break;
             }
         }
@@ -311,7 +289,7 @@ okButton.onClick = function() {
     updateTextObject("box04label", box04LabelInput.text);
     updateTextObject("box04", box04Input.text);
     updateTextObject("box05label", box05LabelInput.text);
-    updateTextObject("box05", box05Input.text);
+    updateTextObject("box05a", box05Input.text);
     updateTextObject("box06label", box06LabelInput.text);
     updateTextObject("box06", box06Input.text);
     updateTextObject("box07label", box07LabelInput.text);
@@ -338,10 +316,6 @@ okButton.onClick = function() {
     updateTextObject("box17", box17Input.text);
     updateTextObject("box18label", box18LabelInput.text);
     updateTextObject("box18", box18Input.text);
-    updateTextObject("box19label", box19LabelInput.text);
-    updateTextObject("box19", box19Input.text);
-    updateTextObject("box20label", box20LabelInput.text);
-    updateTextObject("box20", box20Input.text);
     alert('Text objects updated.');
     dialog.close();
 };
