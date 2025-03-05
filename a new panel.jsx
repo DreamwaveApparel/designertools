@@ -311,9 +311,7 @@ okButton.onClick = function() {
     updateTextObject("box04label", box04LabelInput.text);
     updateTextObject("box04", box04Input.text);
     updateTextObject("box05label", box05LabelInput.text);
-    updateTextObject("box05a", box05aInput.text);
-    updateTextObject("box05b", box05bInput.text);
-    updateTextObject("box05c", box05cInput.text);
+    updateTextObject("box05", box05Input.text);
     updateTextObject("box06label", box06LabelInput.text);
     updateTextObject("box06", box06Input.text);
     updateTextObject("box07label", box07LabelInput.text);
