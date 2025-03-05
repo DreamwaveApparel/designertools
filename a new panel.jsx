@@ -5,17 +5,17 @@ var dialog = new Window('dialog', 'Input Details');
 var scrollGroup = dialog.add('group');
 scrollGroup.orientation = 'row';
 scrollGroup.alignChildren = 'top';
-scrollGroup.size = [400, 600]; // Increased the height for the scrollable area
+scrollGroup.size = [800, 600]; // Updated the size of the dialog window
 
 // Create a container for the scrollable content
 var contentGroup = scrollGroup.add('group');
 contentGroup.orientation = 'column';
 contentGroup.alignChildren = 'left';
-contentGroup.size = [380, 1800]; // Set a larger height for the content
+contentGroup.size = [760, 1800]; // Adjusted the width for the content
 
 // Add a scrollbar
 var scrollbar = scrollGroup.add('scrollbar', undefined, 0, 0, 100);
-scrollbar.size = [20, 600]; // Set the size of the scrollbar
+scrollbar.size = [20, 600]; // Updated the size of the scrollbar
 
 // Function to add labeled input fields
 function addInputField(parent, label) {
@@ -267,15 +267,14 @@ buttonGroup.orientation = 'row';
 var okButton = buttonGroup.add('button', undefined, 'OK');
 var cancelButton = buttonGroup.add('button', undefined, 'Cancel');
 
-// Function to update text objects based on notes
-function updateTextObject(noteLabel, inputText) {
+// Function to update all text objects based on notes
+function updateTextObjects(noteLabel, inputText) {
     if (inputText !== '') {
         var doc = app.activeDocument;
         for (var i = 0; i < doc.pageItems.length; i++) {
             var item = doc.pageItems[i];
             if (item.note === noteLabel && item.typename === "TextFrame") {
                 item.contents = inputText;
-                break;
             }
         }
     }
@@ -283,59 +282,59 @@ function updateTextObject(noteLabel, inputText) {
 
 // Define button actions
 okButton.onClick = function() {
-    updateTextObject("style", styleInput.text);
-    updateTextObject("catalog", catalogInput.text);
-    updateTextObject("gender", genderInput.text);
-    updateTextObject("size", sizeInput.text);
-    updateTextObject("retailer", retailerInput.text);
-    updateTextObject("portfolio", portfolioInput.text);
-    updateTextObject("artwork", artworkInput.text);
-    updateTextObject("season", seasonInput.text);
-    updateTextObject("fabric", fabricInput.text);
-    updateTextObject("construction", constructionInput.text);
-    updateTextObject("application", artApplicationInput.text);
-    updateTextObject("samplelabel", sampleLabelInput.text);
-    updateTextObject("sample", sampleSizeRangeInput.text);
-    updateTextObject("box01label", box01LabelInput.text);
-    updateTextObject("box01", box01Input.text);
-    updateTextObject("box02label", box02LabelInput.text);
-    updateTextObject("box02", box02Input.text);
-    updateTextObject("box03label", box03LabelInput.text);
-    updateTextObject("box03", box03Input.text);
-    updateTextObject("box04label", box04LabelInput.text);
-    updateTextObject("box04", box04Input.text);
-    updateTextObject("box05label", box05LabelInput.text);
-    updateTextObject("box05", box05Input.text);
-    updateTextObject("box06label", box06LabelInput.text);
-    updateTextObject("box06", box06Input.text);
-    updateTextObject("box07label", box07LabelInput.text);
-    updateTextObject("box07", box07Input.text);
-    updateTextObject("box08label", box08LabelInput.text);
-    updateTextObject("box08", box08Input.text);
-    updateTextObject("box09label", box09LabelInput.text);
-    updateTextObject("box09", box09Input.text);
-    updateTextObject("box10label", box10LabelInput.text);
-    updateTextObject("box10", box10Input.text);
-    updateTextObject("box11label", box11LabelInput.text);
-    updateTextObject("box11", box11Input.text);
-    updateTextObject("box12label", box12LabelInput.text);
-    updateTextObject("box12", box12Input.text);
-    updateTextObject("box13label", box13LabelInput.text);
-    updateTextObject("box13", box13Input.text);
-    updateTextObject("box14label", box14LabelInput.text);
-    updateTextObject("box14", box14Input.text);
-    updateTextObject("box15label", box15LabelInput.text);
-    updateTextObject("box15", box15Input.text);
-    updateTextObject("box16label", box16LabelInput.text);
-    updateTextObject("box16", box16Input.text);
-    updateTextObject("box17label", box17LabelInput.text);
-    updateTextObject("box17", box17Input.text);
-    updateTextObject("box18label", box18LabelInput.text);
-    updateTextObject("box18", box18Input.text);
-    updateTextObject("box19label", box19LabelInput.text);
-    updateTextObject("box19", box19Input.text);
-    updateTextObject("box20label", box20LabelInput.text);
-    updateTextObject("box20", box20Input.text);
+    updateTextObjects("style", styleInput.text);
+    updateTextObjects("catalog", catalogInput.text);
+    updateTextObjects("gender", genderInput.text);
+    updateTextObjects("size", sizeInput.text);
+    updateTextObjects("retailer", retailerInput.text);
+    updateTextObjects("portfolio", portfolioInput.text);
+    updateTextObjects("artwork", artworkInput.text);
+    updateTextObjects("season", seasonInput.text);
+    updateTextObjects("fabric", fabricInput.text);
+    updateTextObjects("construction", constructionInput.text);
+    updateTextObjects("application", artApplicationInput.text);
+    updateTextObjects("samplelabel", sampleLabelInput.text);
+    updateTextObjects("sample", sampleSizeRangeInput.text);
+    updateTextObjects("box01label", box01LabelInput.text);
+    updateTextObjects("box01", box01Input.text);
+    updateTextObjects("box02label", box02LabelInput.text);
+    updateTextObjects("box02", box02Input.text);
+    updateTextObjects("box03label", box03LabelInput.text);
+    updateTextObjects("box03", box03Input.text);
+    updateTextObjects("box04label", box04LabelInput.text);
+    updateTextObjects("box04", box04Input.text);
+    updateTextObjects("box05label", box05LabelInput.text);
+    updateTextObjects("box05", box05Input.text);
+    updateTextObjects("box06label", box06LabelInput.text);
+    updateTextObjects("box06", box06Input.text);
+    updateTextObjects("box07label", box07LabelInput.text);
+    updateTextObjects("box07", box07Input.text);
+    updateTextObjects("box08label", box08LabelInput.text);
+    updateTextObjects("box08", box08Input.text);
+    updateTextObjects("box09label", box09LabelInput.text);
+    updateTextObjects("box09", box09Input.text);
+    updateTextObjects("box10label", box10LabelInput.text);
+    updateTextObjects("box10", box10Input.text);
+    updateTextObjects("box11label", box11LabelInput.text);
+    updateTextObjects("box11", box11Input.text);
+    updateTextObjects("box12label", box12LabelInput.text);
+    updateTextObjects("box12", box12Input.text);
+    updateTextObjects("box13label", box13LabelInput.text);
+    updateTextObjects("box13", box13Input.text);
+    updateTextObjects("box14label", box14LabelInput.text);
+    updateTextObjects("box14", box14Input.text);
+    updateTextObjects("box15label", box15LabelInput.text);
+    updateTextObjects("box15", box15Input.text);
+    updateTextObjects("box16label", box16LabelInput.text);
+    updateTextObjects("box16", box16Input.text);
+    updateTextObjects("box17label", box17LabelInput.text);
+    updateTextObjects("box17", box17Input.text);
+    updateTextObjects("box18label", box18LabelInput.text);
+    updateTextObjects("box18", box18Input.text);
+    updateTextObjects("box19label", box19LabelInput.text);
+    updateTextObjects("box19", box19Input.text);
+    updateTextObjects("box20label", box20LabelInput.text);
+    updateTextObjects("box20", box20Input.text);
     alert('Text objects updated.');
     dialog.close();
 };
