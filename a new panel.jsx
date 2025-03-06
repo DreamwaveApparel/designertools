@@ -1,5 +1,10 @@
 // Create a new dialog window
-var dialog = new Window('dialog', 'Input Details');
+var dialog = new Window('dialog', 'Art Pack Style Information Sheet');
+
+// Add descriptive text at the top of the popup window
+var description = dialog.add('statictext', undefined, 'Use this tool to quickly update the text fields in the MAIN art page. The input boxes should show what is currently written in the text objects in the Illustrator file. You can revise as needed, only changes will be updated.', {multiline: true});
+description.alignment = 'left';
+description.size = [760, 40]; // Adjust the size as needed to fit the text
 
 // Create a scrollable group
 var scrollGroup = dialog.add('group');
@@ -11,76 +16,152 @@ scrollGroup.size = [800, 600]; // Updated the size of the dialog window
 var contentGroup = scrollGroup.add('group');
 contentGroup.orientation = 'column';
 contentGroup.alignChildren = 'left';
-contentGroup.size = [760, 1800]; // Adjusted the width for the content
+contentGroup.size = [760, 2400]; // Adjusted the width for the content
 
 // Add a scrollbar
 var scrollbar = scrollGroup.add('scrollbar', undefined, 0, 0, 100);
 scrollbar.size = [20, 600]; // Updated the size of the scrollbar
 
-// Function to add labeled input fields
+// Function to add labeled input fields with labels above the input fields
 function addInputField(parent, label) {
     var group = parent.add('group');
-    group.orientation = 'row';
-    group.add('statictext', undefined, label + ':');
-    var input = group.add('edittext', undefined, '');
-    input.characters = 30;
+    group.orientation = 'column';
+    group.alignChildren = 'left';
+    group.spacing = 2; // Add 2px of space between each input field
+    var labelText = group.add('statictext', undefined, label + ':');
+    var input = group.add('edittext', undefined, '', {multiline: true});
+    input.size = [240, 50]; // first number is width, second is height (20px per line~)
     return input;
 }
 
-// Add input fields
-var styleInput = addInputField(contentGroup, 'Style');
-var catalogInput = addInputField(contentGroup, 'Catalog');
-var genderInput = addInputField(contentGroup, 'Gender');
-var sizeInput = addInputField(contentGroup, 'Size');
-var retailerInput = addInputField(contentGroup, 'Retailer');
-var portfolioInput = addInputField(contentGroup, 'Portfolio');
-var artworkInput = addInputField(contentGroup, 'Artwork');
-var seasonInput = addInputField(contentGroup, 'Season');
-var fabricInput = addInputField(contentGroup, 'Fabric');
-var constructionInput = addInputField(contentGroup, 'Construction');
-var artApplicationInput = addInputField(contentGroup, 'Art Application');
-var sampleLabelInput = addInputField(contentGroup, 'Sample');
-var sampleSizeRangeInput = addInputField(contentGroup, 'Sample Size Range');
-var box01LabelInput = addInputField(contentGroup, 'box01label');
-var box01Input = addInputField(contentGroup, 'box01');
-var box02LabelInput = addInputField(contentGroup, 'box02label');
-var box02Input = addInputField(contentGroup, 'box02');
-var box03LabelInput = addInputField(contentGroup, 'box03label');
-var box03Input = addInputField(contentGroup, 'box03');
-var box04LabelInput = addInputField(contentGroup, 'box04label');
-var box04Input = addInputField(contentGroup, 'box04');
-var box05LabelInput = addInputField(contentGroup, 'box05label');
-var box05Input = addInputField(contentGroup, 'box05');
-var box06LabelInput = addInputField(contentGroup, 'box06label');
-var box06Input = addInputField(contentGroup, 'box06');
-var box07LabelInput = addInputField(contentGroup, 'box07label');
-var box07Input = addInputField(contentGroup, 'box07');
-var box08LabelInput = addInputField(contentGroup, 'box08label');
-var box08Input = addInputField(contentGroup, 'box08');
-var box09LabelInput = addInputField(contentGroup, 'box09label');
-var box09Input = addInputField(contentGroup, 'box09');
-var box10LabelInput = addInputField(contentGroup, 'box10label');
-var box10Input = addInputField(contentGroup, 'box10');
-var box11LabelInput = addInputField(contentGroup, 'box11label');
-var box11Input = addInputField(contentGroup, 'box11');
-var box12LabelInput = addInputField(contentGroup, 'box12label');
-var box12Input = addInputField(contentGroup, 'box12');
-var box13LabelInput = addInputField(contentGroup, 'box13label');
-var box13Input = addInputField(contentGroup, 'box13');
-var box14LabelInput = addInputField(contentGroup, 'box14label');
-var box14Input = addInputField(contentGroup, 'box14');
-var box15LabelInput = addInputField(contentGroup, 'box15label');
-var box15Input = addInputField(contentGroup, 'box15');
-var box16LabelInput = addInputField(contentGroup, 'box16label');
-var box16Input = addInputField(contentGroup, 'box16');
-var box17LabelInput = addInputField(contentGroup, 'box17label');
-var box17Input = addInputField(contentGroup, 'box17');
-var box18LabelInput = addInputField(contentGroup, 'box18label');
-var box18Input = addInputField(contentGroup, 'box18');
-var box19LabelInput = addInputField(contentGroup, 'box19label');
-var box19Input = addInputField(contentGroup, 'box19');
-var box20LabelInput = addInputField(contentGroup, 'box20label');
-var box20Input = addInputField(contentGroup, 'box20');
+// Object to store references to input fields
+var inputFields = {};
+
+// Add input fields in a 3-across layout
+function addInputFieldsInRows(parent, labels) {
+    for (var i = 0; i < labels.length; i += 3) {
+        var rowGroup = parent.add('group');
+        rowGroup.orientation = 'row';
+        rowGroup.alignChildren = 'top';
+        rowGroup.spacing = 10; // Add some space between columns
+        inputFields[labels[i]] = addInputField(rowGroup, labels[i]);
+        if (i + 1 < labels.length) inputFields[labels[i + 1]] = addInputField(rowGroup, labels[i + 1]);
+        if (i + 2 < labels.length) inputFields[labels[i + 2]] = addInputField(rowGroup, labels[i + 2]);
+    }
+}
+
+// Labels for the input fields
+var labels = [
+    'Style', 'Catalog', 'Gender', 'Size', 'Retailer', 'Portfolio',
+    'Artwork', 'Season', 'Fabric', 'Construction', 'Art Application',
+    'Sample', 'Sample Size Range'
+];
+
+// Add the input fields to the content group
+addInputFieldsInRows(contentGroup, labels);
+
+// Add a spacer for 5px space above the descriptive text
+var spacerAbove = contentGroup.add('group');
+spacerAbove.size = [1, 5]; // 5px tall spacer
+
+// Add descriptive text between 'Sample Size Range' and 'box01label'
+var description = contentGroup.add('statictext', undefined, 'Use the inputs below to fill in the information in the colors and trims section of the MAIN art page. The boxes go from 01-10 in the first column, then 11-20 in the second column. The first input is the LABEL of that line, BOX is the information for that line.', {multiline: true});
+description.alignment = 'left';
+description.size = [760, 40]; // Adjust the size as needed to fit the text
+
+// Function to add box label and input fields in a 2-across layout
+function addBoxInputFieldsInRows(parent, labels) {
+    for (var i = 0; i < labels.length; i += 2) {
+        var rowGroup = parent.add('group');
+        rowGroup.orientation = 'row';
+        rowGroup.alignChildren = 'top';
+        rowGroup.spacing = 10; // Add some space between columns
+        inputFields[labels[i]] = addInputField(rowGroup, labels[i]);
+        if (i + 1 < labels.length) inputFields[labels[i + 1]] = addInputField(rowGroup, labels[i + 1]);
+    }
+}
+
+// Update the content group's position based on the scrollbar value
+scrollbar.onChanging = function() {
+    contentGroup.location.y = -scrollbar.value * (contentGroup.size[1] - scrollGroup.size[1]) / 100;
+};
+
+// Add event listener for mouse scroll wheel
+scrollGroup.addEventListener('mousewheel', function(event) {
+    var delta = event.detail ? event.detail * -120 : event.wheelDelta;
+    scrollbar.value -= delta / 120; // Adjust the scroll speed if necessary
+    scrollbar.onChanging();
+    event.preventDefault();
+});
+
+// Labels for the box input fields
+var boxLabels = [
+    'box01label', 'box01', 'box02label', 'box02', 'box03label', 'box03',
+    'box04label', 'box04', 'box05label', 'box05', 'box06label', 'box06',
+    'box07label', 'box07', 'box08label', 'box08', 'box09label', 'box09',
+    'box10label', 'box10', 'box11label', 'box11', 'box12label', 'box12',
+    'box13label', 'box13', 'box14label', 'box14', 'box15label', 'box15',
+    'box16label', 'box16', 'box17label', 'box17', 'box18label', 'box18',
+    'box19label', 'box19', 'box20label', 'box20'
+];
+
+// Add the box labels and inputs to the content group
+addBoxInputFieldsInRows(contentGroup, boxLabels);
+
+// Now you can access the input fields using inputFields object
+var styleInput = inputFields['Style'];
+var catalogInput = inputFields['Catalog'];
+var genderInput = inputFields['Gender'];
+var sizeInput = inputFields['Size'];
+var retailerInput = inputFields['Retailer'];
+var portfolioInput = inputFields['Portfolio'];
+var artworkInput = inputFields['Artwork'];
+var seasonInput = inputFields['Season'];
+var fabricInput = inputFields['Fabric'];
+var constructionInput = inputFields['Construction'];
+var artApplicationInput = inputFields['Art Application'];
+var sampleLabelInput = inputFields['Sample'];
+var sampleSizeRangeInput = inputFields['Sample Size Range'];
+var box01LabelInput = inputFields['box01label'];
+var box01Input = inputFields['box01'];
+var box02LabelInput = inputFields['box02label'];
+var box02Input = inputFields['box02'];
+var box03LabelInput = inputFields['box03label'];
+var box03Input = inputFields['box03'];
+var box04LabelInput = inputFields['box04label'];
+var box04Input = inputFields['box04'];
+var box05LabelInput = inputFields['box05label'];
+var box05Input = inputFields['box05'];
+var box06LabelInput = inputFields['box06label'];
+var box06Input = inputFields['box06'];
+var box07LabelInput = inputFields['box07label'];
+var box07Input = inputFields['box07'];
+var box08LabelInput = inputFields['box08label'];
+var box08Input = inputFields['box08'];
+var box09LabelInput = inputFields['box09label'];
+var box09Input = inputFields['box09'];
+var box10LabelInput = inputFields['box10label'];
+var box10Input = inputFields['box10'];
+var box11LabelInput = inputFields['box11label'];
+var box11Input = inputFields['box11'];
+var box12LabelInput = inputFields['box12label'];
+var box12Input = inputFields['box12'];
+var box13LabelInput = inputFields['box13label'];
+var box13Input = inputFields['box13'];
+var box14LabelInput = inputFields['box14label'];
+var box14Input = inputFields['box14'];
+var box15LabelInput = inputFields['box15label'];
+var box15Input = inputFields['box15'];
+var box16LabelInput = inputFields['box16label'];
+var box16Input = inputFields['box16'];
+var box17LabelInput = inputFields['box17label'];
+var box17Input = inputFields['box17'];
+var box18LabelInput = inputFields['box18label'];
+var box18Input = inputFields['box18'];
+var box19LabelInput = inputFields['box19label'];
+var box19Input = inputFields['box19'];
+var box20LabelInput = inputFields['box20label'];
+var box20Input = inputFields['box20'];
 
 // Function to populate input fields based on existing text objects
 function populateInputFields() {
@@ -256,11 +337,6 @@ function populateInputFields() {
 // Call the function to populate input fields when the dialog is created
 populateInputFields();
 
-// Update the content group's position based on the scrollbar value
-scrollbar.onChanging = function() {
-    contentGroup.location.y = -scrollbar.value * (contentGroup.size[1] - scrollGroup.size[1]) / 100;
-};
-
 // Add OK and Cancel buttons
 var buttonGroup = dialog.add('group');
 buttonGroup.orientation = 'row';
@@ -335,7 +411,7 @@ okButton.onClick = function() {
     updateTextObjects("box19", box19Input.text);
     updateTextObjects("box20label", box20LabelInput.text);
     updateTextObjects("box20", box20Input.text);
-    alert('Text objects updated.');
+    alert('Information Updated');
     dialog.close();
 };
 
